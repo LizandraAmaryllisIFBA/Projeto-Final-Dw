@@ -43,7 +43,7 @@
         $salt = random_bytes(32);
         $criptografada = openssl_pbkdf2($senha, $salt, 32, 600000, 'SHA256');
         $conexao = conectar_bd();
-        $comando = "UPDATE Customers SET Senha_hash = '" + $criptografada + "', Salt= '" + $salt + "' WHERE Id_usuario = '" + $user + "';";
+        $comando = "UPDATE Usuario SET Senha_hash = '" + $criptografada + "', Salt= '" + $salt + "' WHERE idUsuario = '" + $user + "';";
         $resultado_query = mysqli_query($conexao, $comando);
         if (!$resultado_query) {
             error_log('Erro ao tentar salvar senha do usuário ' + $user + ': ' + mysqli_error($conexao));
