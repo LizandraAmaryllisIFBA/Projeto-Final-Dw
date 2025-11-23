@@ -1,47 +1,89 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 body {
-    background-color: #f2e8cf;
+    /*configuração da fonte*/
+    font-family: "Roboto", sans-serif;
+
+    /*configuração da pagina*/
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
-    margin: 0;
-    font-family: Arial, sans-serif;
+    width: 100%;
+
+    /*configurações do background*/
+    background-color: #f2e8cf;
+    background-size: cover;
+    background-position: center;
 }
 
 .form {
-    background-color: rgb(167, 201, 87);
-    padding: 25px 35px;
+    /*configuração do form*/
+    background-color: #a7c957;
+    backdrop-filter: blur(7px);
+    box-shadow: 0 8 32px rgba(0, 0, 0, 0.15);
     border-radius: 12px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+
+    padding: 30px 35px;
+    
     width: 300px;
+    height: 360px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
     text-align: center;
 }
 
 .form h1 {
-    margin-bottom: 20px;
+    margin-bottom: 25px;
     color: #386641;
+    /*mudar a fonte*/
 }
 
-.email {
-    font-size: 15px;
-    margin: 10px 0 5px 0;
-    color: #386641;
+.grupo-email,
+.grupo-senha{
+    position: relative;
+}
+
+label{
+    color: #F2E8CF;
+    padding: 0 5px;
+    position: absolute;
+    transform: translateY(-50%);
+    top: 40%;
+    left: 1em;
+    pointer-events: none;
+    transition: .3s;
     font-weight: bold;
-    padding: 5px;
 }
 
-.name,
-.senha {
-    width: 85%;
-    padding: 8px;
-    margin-bottom: 15px;
-    border: 1px solid #386641;
-    border-radius: 6px;
-    font-size: 14px;
+input{
+    color: white;
+    border: 2px solid var(#386641);
+    background: transparent;
+    border-radius: 5px;
+    width: 250px;
+    height: 60px;
+    padding: 0 1rem;
+    outline: none;
+}
+
+input:focus~label,
+input:valid~label{
+    top: 0;
+    background-color: #a7c957;
+    font-size: 0.8rem;
+    font-weight: bold;
 }
 
 .button {
-    width: 85%;
+    width: 105%;
     background-color: #386641;
     color: white;
     padding: 10px;
@@ -53,7 +95,7 @@ body {
 }
 
 .button:hover {
-    background-color: #48a1c7;
+    background-color: #6A994E;
 }
 
 .link {

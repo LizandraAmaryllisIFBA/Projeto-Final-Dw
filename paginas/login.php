@@ -17,10 +17,23 @@
     ?>
 
     <form method="POST" action="/backend/logar.php" class="form">
-        <h1>LOGIN</h1>
-        <p class="email">Email:</p> <input name="email" required class="name"> <br>
-        <br>
-        <p class="email">Senha:</p> <input name="senha" type="password" required class="senha"> <br><br>
+
+        <div class = "login">
+
+            <h1>Login</h1>
+
+            <div class = "grupo-email">
+                <input required type="email" name = "email">
+                <label for="email">Email</label>
+                <br><br>
+            </div>
+
+            <div class = "grupo-senha">
+                <input required type = "password" name = "senha">
+                <label for="senha">Senha</label><br><br>
+            </div>
+        </div>
+        
         <button name="botao" type="submit" value="logar" class="button"><strong>Logar</strong></button>
         <a href="cadastro.php" class="link"><strong>cadastro</strong></a>
     </form>
