@@ -119,41 +119,53 @@
         $comando="USE " . $nome_bd;
         $resultado_query = mysqli_query($conexao, $comando);
 
-        $comando = "CREATE TABLE TiposUsuario ( 
-                        idTiposUsuario INT PRIMARY KEY,  
-                        Nome VARCHAR(255),  
+        $comando = "CREATE TABLE TipoUsuario ( 
+                        idTipoUsuario INT PRIMARY KEY,  
+                        Nome VARCHAR(255)
                     ); 
 
                     CREATE TABLE Usuario ( 
                         idUsuario INT PRIMARY KEY AUTO_INCREMENT,  
-                        idTiposUsuario INT PRIMARY KEY,  
-                        FOREIGN KEY(idTiposUsuario) REFERENCES TiposUsuario (idTiposUsuario)
+                        idTipoUsuario INT,  
+                        FOREIGN KEY(idTipoUsuario) REFERENCES TipoUsuario (idTipoUsuario),
 
                         Nome VARCHAR(255) NOT NULL,  
-                        Salt INT NOT NULL,  
-                        Senha_hash INT NOT NULL,  
+                        Salt BINARY(32) NOT NULL,  
+                        Senha_hash BINARY(32) NOT NULL,  
                         Email VARCHAR(254) NOT NULL UNIQUE,  
                         CPF CHAR(11) NOT NULL UNIQUE,  
                         Telefone CHAR(11)
                     ); 
 
+                    CREATE TABLE TokensUsuario ( 
+                        idTokensUsuario INT PRIMARY KEY AUTO_INCREMENT,  
+                        idUsuario INT,  
+                        IpCliente VARCHAR(20) NOT NULL,  
+                        DataEmissao DATE NOT NULL,  
+                        Salt BINARY(32) NOT NULL,
+                        Token_hash BINARY(32) NOT NULL,
+                        Validade DATE, 
+                        
+                        FOREIGN KEY(idUsuario) REFERENCES Usuario (idUsuario)
+                    ); 
+
                     CREATE TABLE Endereco ( 
-                        idEndereco INT PRIMARY KEY,  
+                        idEndereco INT PRIMARY KEY AUTO_INCREMENT,  
                         idUsuario INT,  
                         Logradouro VARCHAR(255) NOT NULL,  
                         Numero VARCHAR(255) NOT NULL,  
                         Bairro VARCHAR(255),  
                         Cidade VARCHAR(255),  
                         Estado VARCHAR(255),  
-                        CEP CHAR(8),  
+                        CEP CHAR(9),  
 
                         FOREIGN KEY(idUsuario) REFERENCES Usuario (idUsuario)
                     ); 
 
                     CREATE TABLE Canal ( 
-                        idCanal INT PRIMARY KEY,  
+                        idCanal INT PRIMARY KEY AUTO_INCREMENT,  
                         Nome VARCHAR(255),  
-                        Bio VARCHAR(2048),  
+                        Bio VARCHAR(2048) DEFAULT "",  
                         Caminho_foto VARCHAR(255),  
                         Caminho_banner VARCHAR(255),  
                         idUsuario INT,  
@@ -161,7 +173,7 @@
                     ); 
 
                     CREATE TABLE Comentario ( 
-                        idComentario INT PRIMARY KEY,  
+                        idComentario INT PRIMARY KEY AUTO_INCREMENT,  
                         Texto VARCHAR(255) NOT NULL,  
                         idCanal INT,  
                         idAutor INT,  
@@ -187,7 +199,16 @@
                         FOREIGN KEY(idComentario) REFERENCES Comentario (idComentario),
                         FOREIGN KEY(idUsuario) REFERENCES Usuario (idUsuario),
                         PRIMARY KEY(idUsuario, idComentario)
-                    );"; 
+                    );
+
+
+
+
+                    INSERT INTO TipoUsuario (idTipoUsuario, Nome) 
+                    VALUES
+                        (1, "Comum"),
+                        (2, "Moderador"),
+                        (3, "Administrador");"; 
 
         $resultado_query=mysqli_query($conexao, $comando);
     }
