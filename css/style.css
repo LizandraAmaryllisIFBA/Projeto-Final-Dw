@@ -13,10 +13,10 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 300hv;
+    min-height: 100vh;
 
     /*config do background*/
-    background: url('img_background.jpg') no-repeat;
+    background: url('img_background_certa.jpg') no-repeat;
     background-size: cover;
     background-position: center;
 }
@@ -26,7 +26,7 @@ body{
     background: transparent;
     border: 2px solid rgba(255, 255, 255, .2);
     color: #fff;
-    backdrop-filter: blur(40px);
+    backdrop-filter: blur(20px);
     box-shadow: 0 0 10px rgba(0, 0, 0, .2);
     border-radius: 10px;
     padding: 30px 40px;
@@ -46,6 +46,7 @@ body{
 
 .efeito label{
     color: #F2E8CF;
+    background: transparent;
     padding: 0 5px;
     position: absolute;
     transform: translateY(-50%);
@@ -53,12 +54,11 @@ body{
     left: 1.5em;
     pointer-events: none;
     transition: .3s;
-    font-weight: bold;
 }
 
 .efeito input{
     color: white;
-    border: 2px solid rgba(56, 102, 65, .3);
+    border: 2px solid rgba(236, 236, 236, 0.2);
     background: transparent;
     border-radius: 40px;
     width: 100%;
@@ -78,6 +78,13 @@ input:valid~label{
     font-weight: bold;
 }
 
+.efeito i{
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-35%);
+    font-size: 20px;
+}
 .wrapper .lembrar-senha{
     display: flex;
     justify-content: space-between;

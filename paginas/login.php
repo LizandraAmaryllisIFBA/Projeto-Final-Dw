@@ -22,7 +22,7 @@
     ?>
 
     <div class = "wrapper">
-        <form method="POST" action="/backend/logar.php" class="form">
+        <form method="POST" action="../backend/logar.php" class="form">
             
             <h1>Login</h1>
 
@@ -30,6 +30,7 @@
                 <div class="efeito">
                     <input required type="email" name = "email">
                     <label for="email">Email</label>
+                    <i class='bx  bxs-user'></i> 
                     <br><br>
                 </div>
             </div>
@@ -37,7 +38,8 @@
             <div class = "input-box">
                 <div class="efeito">
                     <input required type = "password" name = "senha">
-                <label for="senha">Senha</label><br><br>
+                    <label for="senha">Senha</label><br><br>
+                    <i class='bx  bxs-lock'></i>
                 </div>   
             </div>
 
@@ -46,7 +48,7 @@
                 <a href="#">Esqueceu a senha?</a>
             </div>
 
-            <button name="botao" type="submit" value="logar" class="button"><strong>Logar</strong></button>
+            <button name="botao" type="submit" value="entrar" class="button"><strong>Entrar</strong></button>
 
             <div class = "cadastro-link">
                 <p>Não possui uma conta?
