@@ -1,40 +1,63 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>perfil</title>
-    <link rel="stylesheet" href="../css/perfil.php">
+    <title>Lista de Canais</title>
+    <link rel="stylesheet" href="../css/principal.css"> 
 </head>
-
 <body>
-    <?php require "cabecalho.php" ?>
 
+    <?php
+        require "cabecalho.php";
+    ?>
+
+    <!--  -->
     <div class="container-descricao">
-        <img src="{{banner_url}}" class="banner" alt="Banner do canal">
-        <img src="{{foto_perfil_url}}" class="foto_perfil" alt="Foto do perfil">
-
-
-        <h1>{{nome_canal}}</h1>
-        <p>{{bio_canal}}</p>
+        <?php 
+            if (!isset($conexao)) {$conexao = conectar_bd();}
+            $comando = "SELECT * FROM Canal WHERE idUsuario = '" . $id_usuario . "';";
+            $resultado_query = mysqli_query($conexao, $comando);
+            if (mysqli_num_rows($resultado_query) === 0) {header("Location: /"); exit();}
+            $canal = mysqli_fetch_assoc($resultado_query);
+        ?>
+        <?= "
+            <img src=\"{$canal['Caminho_banner']}\" alt=\"Banner do canal {$canal['Nome']}\" class=\"banner\">
+            <img src=\"{$canal['Caminho_foto']}\" alt=\"Foto de perfil do canal {$canal['Nome']}\" class=\"foto_perfil\">
+            <h1>{$canal['Nome']}</h1>
+            <p>{$canal['sBio']}</p>"
+        ?>
     </div>
 
-    <div class="container-canais" id="lista-comentarios">
 
-        <div class="comentario">
-            <h3>{{nome_autor}}</h3>
-            <p>{{texto_comentario}}</p>
+    <!-- Lista de comentários -->
+    <div class="container-canais">
 
-
-            <div class="reacoes">
-                <button class="btn-like">👍 Like <span class="count-like">{{qtd_likes}}</span></button>
-                <button class="btn-dislike">👎 Dislike <span class="count-dislike">{{qtd_dislikes}}</span></button>
-            </div>
-        </div>
-
+        <!-- Cada comentário -->
+        <?php 
+            $comando = "SELECT * FROM Comentario 
+                            JOIN Usuario ON Comentario.idAutor = Usuario.idUsuario 
+                            WHERE Comentario.idCanal = " . $vars["id"] .
+                       "    ORDER BY DataPublicacao DESC";
+            $resultado_query = mysqli_query($conexao, $comando);
+            if (mysqli_num_rows($resultado_query) !== 0) {
+                // Loop que escreve os comentários
+                // Observação importante que ele é aberto dentro dessa tag php e fechado apenas na tag mais abaixo
+                while ($comentario = mysqli_fetch_assoc($resultado_query)) {
+                    $canal_autor = idUsuario_para_idCanal($comentario['Comentario.idAutor']);
+        ?>
+        <?= "<div class=\"comentario\">
+                <div class=\"info\">
+                    <a href=\"/canal/{$canal_autor}\">
+                        <h3>{$comentario['Usuario.Nome']}</h3>
+                    </a>
+                    <p>{$comentario['Comentario.Texto']}</p>
+                </div>
+            </div>"
+        ?>
+        <?php }}?>
     </div>
+</div>
 
 </body>
-
 </html>

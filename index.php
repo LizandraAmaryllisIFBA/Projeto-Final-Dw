@@ -57,7 +57,7 @@
                         if ($id_meu_canal !== $vars["id"]) 
                             {require 'paginas/canal.php';}
                         else 
-                            {require 'paginas/canal_edicao.php';}
+                            {require 'paginas/canal.php';}
                         break;
                     } else {
                         header('Location: /login');

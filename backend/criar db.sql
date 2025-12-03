@@ -56,7 +56,8 @@ CREATE TABLE Canal (
 
 CREATE TABLE Comentario ( 
 	idComentario INT PRIMARY KEY AUTO_INCREMENT,  
-	Texto VARCHAR(255) NOT NULL,  
+	Texto VARCHAR(255) NOT NULL, 
+	DataPublicacao DATETIME, 
 	idCanal INT,  
 	idAutor INT,  
 	FOREIGN KEY(idCanal) REFERENCES Canal (idCanal),
